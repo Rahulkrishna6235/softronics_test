@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:softronics_test/fonts/font.dart';
 import 'package:softronics_test/repository/repo_unuversity.dart';
 import 'package:softronics_test/view/Detailspage.dart';
 
@@ -36,20 +37,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         flexibleSpace: Container(
-           decoration: BoxDecoration(
-               gradient: LinearGradient(
-                   begin: Alignment.topCenter,
-                   end: Alignment.bottomCenter,
-                   colors: [
-                     Colors.deepOrangeAccent,
-                     Colors.yellow,
-                     Colors.yellowAccent
-                   ]
-               )
-           ),
-         ),
-        title: Text('Colleges'),
+        backgroundColor: Colors.grey.withOpacity(0.8),
+         toolbarHeight: 90,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
+         // flexibleSpace: Container(
+         //   decoration: BoxDecoration(
+         //       gradient: LinearGradient(
+         //           begin: Alignment.topCenter,
+         //           end: Alignment.bottomCenter,
+         //           colors: [
+         //             Colors.deepOrangeAccent,
+         //             Colors.yellow,
+         //             Colors.yellowAccent
+         //           ]
+         //       )
+         //   ),
+         // ),
+        title: Center(child: Text('College List',style: getFonts(22, Colors.black)),),
       ),
       body: uniproducts == null
           ? Center(child: CircularProgressIndicator())
@@ -57,15 +65,15 @@ class _HomePageState extends State<HomePage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.deepOrangeAccent,
-                  Colors.yellow,
-                  Colors.yellowAccent
-                ]
-            )
+            // gradient: LinearGradient(
+            //     begin: Alignment.topCenter,
+            //     end: Alignment.bottomCenter,
+            //     colors: [
+            //       Colors.deepOrangeAccent,
+            //       Colors.yellow,
+            //       Colors.yellowAccent
+            //     ]
+            // )
         ),
             child: ListView.builder(
                     itemCount: uniproducts!.length,
@@ -74,26 +82,41 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
-                  InkWell(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsSecond(
-                        name: "${uniproducts![index].name}",
-                        alpha: "${uniproducts![index].alphaTwoCode}",
-                        website: "${uniproducts![index].webPages.join()}",
-                        domains: "${uniproducts![index].domains.join()}",
-                        Country: "${uniproducts![index].country}",
-                      )));
-                    },
-                    child: Card(
-                      child: ListTile(
-                        title: Text(uniproducts![index].name),
-                        // You can display more information here if needed
-                      ),
-                      elevation: 5,
-                      shadowColor: Colors.black12,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 2,
+                          blurRadius: 3,
+                          offset: Offset(0, 3)
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(12)
+                    ),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsSecond(
+                          name: "${uniproducts![index].name}",
+                          alpha: "${uniproducts![index].alphaTwoCode}",
+                          website: "${uniproducts![index].webPages.join()}",
+                          domains: "${uniproducts![index].domains.join()}",
+                          Country: "${uniproducts![index].country}",
+                        )));
+                      },
+                      child: Card(
+                        child: ListTile(
+                          title: Text(uniproducts![index].name,style: getFonts(20, Colors.black),),
+                          trailing: Icon(Icons.arrow_forward_ios_rounded,color: Colors.grey,size: 20,),
+                          // You can display more information here if needed
+                        ),
 
+                        elevation: 40,
+                        shadowColor: Colors.black12,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+
+                        ),
                       ),
                     ),
                   ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../fonts/font.dart';
+
 class DetailsSecond extends StatefulWidget {
   final String name;
   final String Country;
@@ -31,31 +33,79 @@ class _DetailsSecondState extends State<DetailsSecond> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.deepOrangeAccent,
-              Colors.yellow,
-              Colors.yellowAccent
-            ]
-          )
+          color: Colors.grey.withOpacity(0.4)
+
         ),
         child: Container(
+          padding: EdgeInsets.only(left: 10,right: 10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 20,),
-              Center(child: Text(widget.name,style: TextStyle(fontSize: 35),)),
+              Center(child: Text(widget.name,style: getFonts(30, Colors.black),)),
               SizedBox(height: 30,),
-              Center(child: Text(widget.Country,style: TextStyle(fontSize: 20),)),
+              Center(child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.place,size: 22,),
+                  Text(widget.Country,style: TextStyle(fontSize: 20),),
+                ],
+              )),
               SizedBox(height: 10,),
-              Center(child: Text(widget.alpha,style: TextStyle(fontSize: 25),)),
+              Center(child: Text(widget.alpha,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)),
               SizedBox(height: 20,),
-              Text(widget.domains,style: TextStyle(fontSize: 20),),
-              SizedBox(height: 20,),
-              InkWell(onTap: _launchURL,
-                child: Text(widget.website,style: TextStyle(decoration: TextDecoration.underline,fontSize: 20),),
+              Padding(
+                padding: const EdgeInsets.only(left: 15,right: 15),
+                child: Container(
+                  width: 500,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.grey,
+                          //Colors.grey.withOpacity(0.10),
+                          Colors.white
+                        ]
+                      ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 3,
+                        blurRadius: 4,
+                        offset: Offset(0, 1),
+
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border(
+
+                    )
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(widget.domains,style: normalFonts(20, Colors.grey.shade400),),
+                        SizedBox(height: 20,),
+                        Text("More Details",style: normalFonts(18, Colors.black)),
+                        SizedBox(height: 3,),
+
+                        InkWell(onTap: _launchURL,
+                          child: Row(
+
+                            children: [
+                              Text("Website   :  ",style: normalFonts(18, Colors.black)),
+                              Text(widget.website,style: TextStyle(decoration: TextDecoration.underline,fontSize: 17,color: Colors.grey),),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               )
             ],
           ),
